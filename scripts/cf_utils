@@ -1,0 +1,24 @@
+wipeCFApps () {
+  for APP in `cf apps | tail -n +5 | awk '{ print $1}' `; do cf delete -f $APP; done
+}
+
+wipeCFServices () {
+  for SERIVCE in `cf s | tail -n +4 | awk '{ print $1}' `; do cf ds -f $SERIVCE; done
+}
+
+removeCF () {
+  echo Going to remove all service keys, services, apps and mtas:
+  for MTA in `cf mtas | tail -n +4 | awk '{ print $1}'`; do cf undeploy $MTA --delete-services --delete-service-keys -f;done
+  for APP in `cf apps | tail -n +5 | awk '{ print $1}' `; do cf delete -f $APP; done
+  for SERIVCE in `cf s | tail -n +4 | awk '{ print $1}'`; do cf ds -f $SERIVCE; done
+} 
+
+wipeCFServiceKeys () {
+  for SERIVCE in `cf s | tail -n +4 | awk '{ print $1}' `
+    do
+      for SERIVCEKEY in `cf sk $SERIVCE | tail -n +4`
+      do
+          cf dsk -f  $SERIVCE $SERIVCEKEY
+      done
+    done
+}
