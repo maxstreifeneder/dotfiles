@@ -58,8 +58,6 @@ main() {
 
   setup_dotfiles
 
-  modify_theia_settings
-
   install_utils
 
 }
