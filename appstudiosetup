@@ -37,12 +37,6 @@ setup_dirs() {
   [[ -d "$execdir" ]] || mkdir "$execdir"
 }
 
-# Configure dev space as I like it
-modify_theia_settings() {
-  ln -s -f "$dotfiles/.theia/settings.json" "$HOME/.theia/"
-  ln -s -f "$dotfiles/.theia/keymaps.json" "$HOME/.theia/"
-}
-
 # Install common utilities
 # ------------------------
 
